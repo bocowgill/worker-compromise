@@ -71,7 +71,11 @@ fidelity:
   divergences: >-
     The model uses a strict gain above the switching cost on the firm side.
     A matched worker must also gain strictly more than the cost. The unmatched
-    worker is always willing to switch. Ranks count partners valued at least as
+    worker is always willing to switch. Pittel and Rudov's displayed blocking
+    events include gains exactly equal to the threshold. At each market size
+    there are finitely many utility differences between distinct partners, each
+    with a continuous distribution, so the two conventions agree almost surely.
+    Ranks count partners valued at least as
     highly as the assigned partner, including the assigned partner itself.
     Ties have probability zero. The worker averages in the first theorem use
     the n matched workers. For the utility optimum, the worker-side average
