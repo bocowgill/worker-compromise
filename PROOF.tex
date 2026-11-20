@@ -1,0 +1,244 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,hmargin=.88in,vmargin=.82in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{pdftitle={One extra worker rules out the square-root welfare compromise}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newcommand{\E}{\mathbb E}
+\newcommand{\Prob}{\mathbb P}
+\newcommand{\ind}{\mathbf 1}
+\newcommand{\eps}{\varepsilon_n}
+\setlength{\parindent}{1.15em}
+\setlength{\parskip}{2pt}
+\raggedbottom
+\begin{document}
+\begin{center}
+{\LARGE\bfseries One extra worker rules out the\\[2pt] square-root welfare compromise}
+\end{center}
+
+An unmatched worker can approach every firm. A firm that values her must
+find a partner it values nearly as much. If every such partner earns low
+utility at that firm, its assigned worker may in turn be willing to move
+elsewhere. Can a clearinghouse still give both sides mean partner ranks
+on the $\sqrt n$ scale, or both sides mean utility near $\tfrac12\log n$?
+
+There are $n\ge2$ firms and $n+1$ workers. Firm $i$ values worker $j$ at $U_{ij}$,
+and worker $j$ values firm $i$ at $V_{ij}$. All these values are independent
+rate-one exponentials. An assignment matches each firm to a distinct worker.
+A pair blocks if the firm would gain strictly more than
+$\eps=\log n/(6\sqrt n)$ and the worker is either unmatched or would also
+gain strictly more than $\eps$. An assignment is stable if no pair blocks.
+Deferred acceptance supplies a zero-cost stable assignment, which is also
+stable at this cost.
+
+\begin{theorem}\label{thm:main}
+Put $\delta=1/400000$. With probability tending to one over markets,
+every stable assignment simultaneously satisfies
+\[
+  \overline R_W>n^{1/2+\delta},
+  \qquad
+  \overline V_W<(1/2-\delta)\log n .
+\]
+Here $\overline R_W$ and $\overline V_W$ are the mean partner rank and
+mean utility among the $n$ matched workers. Rank one is best.
+\end{theorem}
+
+Draw the market first. Even a clearinghouse that sees all preferences and
+chooses the stable assignment with the lowest worker mean rank misses the rank
+benchmark. Choosing instead the one with the highest worker mean utility misses
+the utility benchmark on the same event.
+
+Over the finite stable set, let $C_n$ be the minimum of the larger of the two
+sides' mean ranks among matched agents. Let $H_n$ be the maximum of the smaller
+mean utility divided by $\log n$, counting the unmatched worker at zero among
+all $n+1$ workers. Then $\log C_n/\log n>1/2+\delta$ and $H_n<1/2-\delta$ on
+the theorem's event, ruling out both proposed limits of $1/2$.
+
+\paragraph{From firm utility to both worker outcomes.}
+Blocking threats force firms above the half-log utility benchmark
+(Section~\ref{sec:firm}). To see what this leaves for workers, let
+$R_{ij}$ be worker $j$'s rank for firm $i$ and put
+$W_{ij}=\max\{V_{ij},\log(n/R_{ij})\}$. For every fixed $\eta>0$,
+with probability tending to one, every assignment $M$ satisfies
+\begin{equation}\label{eq:capacity}
+  \frac1n\sum_i (U_{iM(i)}+W_{iM(i)}) < (1+\eta)\log n .
+\end{equation}
+Indeed, $R_{ij}$ is uniform on $\{1,\ldots,n\}$ by exchangeability and
+absence of ties. In distribution $R_{ij}=\lceil nZ\rceil$ for $Z$ uniform
+on $(0,1)$, so $\log(n/R_{ij})$ is stochastically bounded above by the
+rate-one exponential $-\log Z$. For $0<\theta<1$, bounding the maximum
+of the two exponentials by their sum gives
+$\E e^{\theta W_{ij}}\le 2/(1-\theta)$. Independence of firm and worker
+preferences gives $\E e^{\theta(U_{ij}+W_{ij})}\le 2/(1-\theta)^2$.
+By Jensen's inequality on the assigned pairs, then enlarging the sum to
+all pairs, a violation of \eqref{eq:capacity} by any $M$ implies
+\[
+ \frac1n\sum_{i,j}e^{\theta(U_{ij}+W_{ij})}\ \ge\ n^{\theta(1+\eta)}.
+\]
+The left side has mean at most $2(n+1)/(1-\theta)^2$. Taking
+$1/(1+\eta)<\theta<1$ makes the probability of a violation tend to zero
+by Markov's inequality.
+
+Write $S(M)=\sum_i e^{-U_{iM(i)}}$. Section~\ref{sec:firm} proves
+$S(M)\le n^{1/2-2\delta}$ uniformly over stable assignments with high
+probability. Convexity of $-\log$ then gives mean firm utility at least
+$\log(n/S(M))\ge(1/2+2\delta)\log n$. Apply \eqref{eq:capacity} with
+$\eta=\delta$. The mean of $W$ on matched pairs is below
+$(1/2-\delta)\log n$. It bounds both $\overline V_W$ and
+$\log(n/\overline R_W)$ from above, the latter by convexity of $-\log$.
+This proves Theorem~\ref{thm:main}. Including the unmatched worker multiplies
+the nonnegative matched-worker mean utility by $n/(n+1)$.
+
+\section{Why stability forces high firm utility}\label{sec:firm}
+
+Use the tail probabilities $X_{ij}=e^{-U_{ij}}$ and $Y_{ij}=e^{-V_{ij}}$.
+They are independent uniforms on $(0,1)$. Smaller values denote more
+desirable partners. Write $q=e^{-\eps}$, so a strict gain of more than
+$\eps$ means the new mark is less than $q$ times the current mark.
+For an assignment let $x_i$ and $y_i$ be the two marks on firm $i$'s
+assigned edge. Set $S=\sum_i x_i$, $T=\sum_i y_i$, $h=4\delta=10^{-5}$,
+and $b_*=n^{-1/4}$.
+
+\begin{lemma}[Workers willing to move]\label{lem:tail}
+For all large $n$ and each $q\in[1/2,1]$, except on an event of probability
+at most $(n+1)e^{-(\log n)^2/1024}$, every stable assignment satisfies
+\[
+    \sum_i y_i\,\ind_{\{y_i\ge b_*\}}\ \ge\ n^h-1 .
+\]
+\end{lemma}
+
+A worker with mark $y_i$ would gain more than the switching cost at any
+new firm with worker mark below $q y_i$. If firms also have a large total
+mark $S$, these workers have many opportunities to form a blocking pair.
+The appendix proves the worker bound. We now quantify that last step.
+
+\begin{lemma}\label{lem:firm}
+With probability tending to one, every stable assignment satisfies
+$S\le n^{1/2-2\delta}$.
+\end{lemma}
+
+\begin{proof}
+Set $s=n^{1/2-2\delta}$ and $B=n^h-1$. Count stable assignments with both
+$S\ge s$ and worker tail sum at least $B$, and denote their number by $N$.
+If some stable assignment has $S\ge s$, either some stable assignment has
+tail sum below $B$ or $N\ge1$. Lemma~\ref{lem:tail} bounds the first
+probability. The second is at most $\E N$.
+Fix an injection and label its matched workers by their firms. Conditional
+on its assigned marks, distinct off-assignment pairs use independent
+edges. The probability of stability is
+\[
+ \prod_i(1-qx_i)\prod_{i\ne j}(1-q^2x_i y_j)
+ \ \le\ \exp\!\left(-qS-q^2ST+q^2\sum_i x_i y_i\right)
+ \ \le\ e^{-q^2ST}.
+\]
+The first product comes from the unmatched worker. Since $y_i\le1$ and
+$q\le1$, it absorbs the correction for the assigned edges.
+
+At fixed $S$, extend the worker integral to the positive orthant and put
+$z_i=q^2 S y_i$. The factor $e^{-q^2ST}$ becomes the joint density of
+independent rate-one exponentials $Z_i$ in the new variables, with
+Jacobian $(q^2 S)^{-n}$. At a given firm sum $S$, write
+$x_n=S-\sum_{i<n}x_i$. The other $n-1$ nonnegative coordinates
+sum to at most $S$, a simplex of volume $S^{n-1}/(n-1)!$.
+Thus the powers of $S$ leave just $dS/S$. There are $(n+1)!$ injections.
+As $S$ increases from $s$, the required tail sum of the $Z_i$ increases
+and fewer coordinates qualify. The expected count is therefore at most
+\[
+ n(n+1)q^{-2n}\log(n/s)\,
+ \Prob\!\left(\sum_i Z_i\ind_{\{Z_i\ge q^2s b_*\}}\ge q^2sB\right).
+\]
+For $Z$ rate-one exponential and $a\ge0$, integration on $(0,a)$
+and $[a,\infty)$ gives
+$\E\exp(\tfrac12 Z\ind_{\{Z\ge a\}})=1-e^{-a}+2e^{-a/2}$.
+Exponential Markov and independence bound the displayed probability by
+$\exp[-q^2sB/2+2n e^{-q^2s b_*/2}]$. Now $s b_*=n^{1/4-2\delta}$
+and $sB\sim n^{1/2+2\delta}$. Since $q\ge1/2$ eventually, the last
+positive term tends to zero, and $2n\eps=\sqrt n\log n/3=o(sB)$.
+Hence $\E N\to0$.
+\end{proof}
+
+\appendix
+\section{How blocking threats spread}\label{sec:propagation}
+
+To prove Lemma~\ref{lem:tail}, fix some assigned pairs and ask whether
+\emph{any} stable completion can violate the bound.
+
+Use scales $b_\ell=(\log n)^{-2}8192^{-\ell}$ for
+$0\le\ell\le L=\lfloor\log n/(8\log8192)\rfloor$. Even the smallest
+scale is at least $n^{-1/8}/(\log n)^2\ge b_*$ for large $n$.
+
+Fix a candidate unmatched worker $u$ and an injective partial assignment $P$
+excluding $u$. Fix both marks on every edge in the rows of the firms in $P$.
+Let $J$ be its workers, $y_j$ their assigned worker marks, and put
+$D=1+\sum_{j\in J}y_j$. The one represents the unmatched worker, who
+is always willing to move. At scale $b=b_\ell$ assume that all recorded
+$y_j\ge b$ and $D\ge(129/128)^\ell$. Write $E(P,u)$ for the event that some
+stable completion of $P$ leaves $u$ unmatched and has tail sum $<n^h-1$.
+For every fixed value of the recorded rows, we claim the remaining independent
+rows give $\Prob(E(P,u))\le e^{-D/(1024b)}$.
+If $D\ge n^h$, the recorded partners alone preclude such a completion.
+This settles the last stage, since
+$\log(129/128)/(8\log8192)>h$ (use $\log(1+1/128)\ge1/129$ and
+$\log8192<10$). The floor in $L$ costs only a constant factor.
+
+\paragraph{Which firms must take such a worker?}
+Suppose $D<n^h$ and $\ell<L$. Put $t=1/(nb)$.
+In each unused row $i$, consider two tests.
+First, some old worker threatens the firm if it takes a partner with
+$x_i>t$. This test passes if $X_{iu}<qt$, or if some $j\in J$ has
+$X_{ij}<qt$ and $Y_{ij}<q y_j$. Second, no fresh worker
+$j\notin J\cup\{u\}$ has both $X_{ij}\le t$ and $Y_{ij}\le b$.
+Call the row forced if it passes both. In a stable completion, the first
+test forces $x_i\le t$, since its witness is assigned elsewhere or
+unmatched. The second then forces $Y_{iM(i)}>b$ for the actual partner $M(i)$.
+
+The first test has probability
+$1-(1-qt)\prod_{j\in J}(1-q^2t y_j)$ between $tD/8$ and $tD$.
+For the lower bound use $qt+q^2t\sum_j y_j\ge tD/4$,
+$1-z\le e^{-z}$, and $1-e^{-a}\ge a/2$ for $0\le a\le1$.
+Here $tD\le n^{-3/4+h}$. The union bound gives the upper estimate.
+The second test uses disjoint columns and has probability at least
+$(1-1/n)^n\ge1/4$. There are at least $n/2$ unused rows because
+$|J|\le D/b\le n^{h+1/4}$. The number of forced rows is binomial with
+mean at least $D/(64b)$. The probability of fewer than $D/(128b)$ is
+therefore at most $e^{-D/(512b)}$ by the half-mean Chernoff bound.
+
+\paragraph{Paying for the choice of partners.}
+If $E(P,u)$ occurs and there are at least $D/(128b)$ forced rows, take any
+violating completion. Its partners on these rows form a partial assignment $F$
+of new firms to distinct fresh workers. Each pair adds $y>b$, so
+$D'=D+\sum_{F}y\ge(129/128)D$. For each fixed candidate $F$, retain the event
+$A_F$ that its firms pass the first test, its specified edges have $X\le t$ and
+$Y>b$, and $D'\ge(129/128)D$. Every violating completion on this branch
+therefore witnesses $A_F\cap E(P\cup F,u)$ for at least one $F$.
+
+For fixed $F$, reveal only its named rows. These determine $A_F$ given the
+recorded rows. On $A_F$ the next stage's hypotheses hold. The skipped rows
+retain their independent law because no test outcome on them was required.
+Applying induction at scale $b/8192$ and averaging over the named rows gives
+\[
+ \Prob\big(A_F\cap E(P\cup F,u)\big)
+ \ \le\ e^{-8D/b}\,\E\!\left[\ind_{A_F}\prod_{(i,j)\in F}e^{-8Y_{ij}/b}\right].
+\]
+On each chosen row the first test has probability at most $tD$ and uses
+different columns from the specified partner's edge. That edge has $X\le t$
+and $Y\in dy$ with probability $t\,dy$. After dropping the growth condition,
+the row contributes at most $(tD)t\int_b^1e^{-8y/b}\,dy\le t^2Db/8$.
+To bound the nonnegative sum over $F$, we can now also drop the requirement
+that the chosen partners be distinct. Each unused row can be
+skipped or can name one of at most $n$ fresh workers. Independence across
+rows bounds the contribution of all valid choices by
+\[
+ e^{-8D/b}(1+nt^2Db/8)^n
+ \ \le\ \exp[-(8-1/8)D/b],
+ \qquad n^2t^2 b=1/b .
+\]
+Adding the probability of too few forced rows yields at most
+$2e^{-D/(512b)}\le e^{-D/(1024b)}$, since $D/b\ge(\log n)^2$.
+This closes the backward induction. Start with the
+empty assignment, $D=1$, and sum over the $n+1$ possible identities of
+$u$ to obtain Lemma~\ref{lem:tail}.\hfill$\square$
+\end{document}

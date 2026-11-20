@@ -1,0 +1,106 @@
+version: "v0.4"
+
+project:
+  name: "One extra worker rules out the square-root welfare compromise"
+  description: >-
+    A clearinghouse observes a market with n firms and n+1 workers and can choose
+    any stable assignment. Both sides draw independent rate-one exponential
+    utilities for every firm-worker pair. Changing partners costs log(n)/(6 sqrt(n)).
+    Write δ = 1/400000. As n grows, with probability tending to one, every stable
+    assignment gives the matched workers a mean partner rank greater than
+    n^(1/2+δ) and a mean utility less than (1/2−δ) log(n). Rank one is best.
+    Consequently, even a clearinghouse that chooses separately for each objective
+    cannot deliver mean partner ranks at the square-root benchmark on both sides,
+    or mean utilities at the half-log benchmark on both sides.
+  authors: ["Bo Cowgill"]
+  responsible_maintainers: ["Bo Cowgill"]
+  license: "Apache-2.0"
+
+classification:
+  arxiv: ["econ.TH", "math.PR"]
+  msc2020: ["91B68", "60C05"]
+
+sources:
+  - title: "One extra worker rules out the square-root welfare compromise"
+    type: "original-proof"
+    relationship: "other"
+    note: >-
+      PROOF.pdf and its source PROOF.tex give the theorem, its consequence for
+      the two optimal compromises, and the proof. The repository includes the
+      substantive Lean development.
+  - title: "Stable matchings under relaxed random preferences"
+    authors: ["Boris Pittel", "Kirill Rudov"]
+    id: "doi:10.1007/s00182-026-01016-x"
+    type: "paper"
+    location: "https://doi.org/10.1007/s00182-026-01016-x"
+    relationship: "background"
+    note: >-
+      International Journal of Game Theory 55, article 43 (2026). This paper
+      motivates the exponential matching market with switching costs. The two
+      welfare bounds for one extra worker are the subject of the accompanying
+      proof note.
+
+related_formalizations:
+  - id: "https://github.com/google-deepmind/formal-conjectures/blob/77823d1acfb02489163e8b7758bdc46d61541153/FormalConjecturesForMathlib/Combinatorics/SwitchingCostMatching.lean"
+    relationship: "adapts"
+    note: >-
+      The definitions of preferences, injective assignments, blocking pairs,
+      stability and the market law follow the Apache-2.0 shared market model.
+
+status:
+  scope: >-
+    Two probability limits for a market drawn before a stable assignment is
+    chosen. The first bounds both outcomes across every stable assignment at
+    once. The second bounds two optima over the stable set on the same market
+    draw. Each optimum can use a different assignment. The result assumes one
+    extra worker and the specified sequence of switching costs.
+  sorry_count: 0
+  sorry_in_definitions: 0
+  axioms: ["propext", "Classical.choice", "Quot.sound"]
+
+automation:
+  methods:
+    - method: "agent"
+      framework: "OpenAI Codex"
+      tool_setup: >-
+        Codex helped formalize the results in Lean, check the two statements
+        against the proof note and prepare the release package.
+  spend_usd: "not tracked"
+
+fidelity:
+  divergences: >-
+    The model uses a strict gain above the switching cost on the firm side.
+    A matched worker must also gain strictly more than the cost. The unmatched
+    worker is always willing to switch. Ranks count partners valued at least as
+    highly as the assigned partner, including the assigned partner itself.
+    Ties have probability zero. The worker averages in the first theorem use
+    the n matched workers. For the utility optimum, the worker-side average
+    includes all n+1 workers and counts the unmatched worker at zero.
+
+review:
+  status: "self-assessed"
+  notes: >-
+    Codex checked the market law, stability convention, quantifiers, worker
+    populations, normalizations and strict inequalities against the proof note.
+    The zero placeholder count covers Solution and its proof modules. Challenge
+    deliberately leaves the two theorem proofs open for Comparator.
+
+alignment:
+  namespace: "WorkerCompromise"
+  statements:
+    - source: "PROOF.pdf, Theorem 1"
+      lean: "WorkerCompromise.allStableWorkerBounds_tendsto_one"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        The probability that both strict worker bounds hold for every stable
+        assignment of a realized market tends to one.
+    - source: "PROOF.pdf, consequence following Theorem 1"
+      lean: "WorkerCompromise.optimalCompromises_tendsto_one"
+      module: "Solution"
+      status: "proved"
+      note: >-
+        Let C be the minimum, over stable assignments, of the larger of the two
+        mean ranks. Let H be the maximum, over stable assignments, of the smaller
+        of the two population mean utilities divided by log(n).
+        The probability that log(C)/log(n) > 1/2+δ and H < 1/2−δ tends to one.
