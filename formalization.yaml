@@ -36,10 +36,13 @@ sources:
     location: "https://doi.org/10.1007/s00182-026-01016-x"
     relationship: "background"
     note: >-
-      International Journal of Game Theory 55, article 43 (2026). This paper
-      motivates the exponential matching market with switching costs. The two
-      welfare bounds for one extra worker are the subject of the accompanying
-      proof note.
+      International Journal of Game Theory 55, article 43 (2026). Following
+      Theorem 1.1, Pittel and Rudov ask how partner ranks behave when switching
+      costs are large enough that the expected number of stable assignments
+      grows faster than any polynomial in n. At the cost studied here, the
+      accompanying proof gives a one-sided answer. With one extra worker, even
+      the stable assignment that minimizes matched workers’ average partner rank
+      gives them an average rank above sqrt(n) with probability tending to one.
 
 related_formalizations:
   - id: "https://github.com/google-deepmind/formal-conjectures/blob/77823d1acfb02489163e8b7758bdc46d61541153/FormalConjecturesForMathlib/Combinatorics/SwitchingCostMatching.lean"

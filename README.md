@@ -8,7 +8,7 @@ There are $n\ge 2$ firms and $n+1$ workers. Each firm assigns a utility to each 
 
 A firm and a worker can block an assignment if the firm would gain strictly more than $\varepsilon_n=\log(n)/(6\sqrt n)$ and the worker is either unmatched or would also gain strictly more than $\varepsilon_n$. An assignment is stable if it has no blocking pair. A stable assignment exists in every such market.
 
-The switching-cost model follows Pittel and Rudov. The two welfare bounds below are proved in the accompanying note. [Pittel and Rudov, *Stable matchings under relaxed random preferences*](https://doi.org/10.1007/s00182-026-01016-x)
+Pittel and Rudov ask how partner ranks behave when switching costs are large enough that the expected number of stable assignments grows faster than any polynomial in $n$. At the cost studied here, the accompanying proof gives a one-sided answer. With one extra worker, even the stable assignment that minimizes matched workers’ average partner rank gives them an average rank above $\sqrt n$ with probability tending to one. [Pittel and Rudov, *Stable matchings under relaxed random preferences*, discussion following Theorem 1.1](https://doi.org/10.1007/s00182-026-01016-x)
 
 ## The two theorems
 
