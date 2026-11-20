@@ -21,6 +21,9 @@ public import Mathlib
 /-!
 # Matchings with switching costs
 
+Adapted from the Formal Conjectures shared model. This version imports Mathlib
+and retains the market definitions and probability instance used in the welfare proof.
+
 The market model from Pittel and Rudov's
 [Stable matchings under relaxed random preferences](https://doi.org/10.1007/s00182-026-01016-x).
 The worker count defaults to one more than the firm count.
