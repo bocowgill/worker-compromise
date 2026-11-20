@@ -35,3 +35,5 @@ $$
 The unmatched worker is willing to join any firm. If a firm values her at $u$, stability requires that its assigned worker give it utility at least $u-\varepsilon_n$. Matched workers can pose further blocking threats at other firms. The proof bounds the probability that any stable assignment escapes the resulting constraints, then uses a bound on the joint payoffs of firms and workers to obtain both worker inequalities. [Three-page proof](PROOF.pdf) · [LaTeX source](PROOF.tex)
 
 Codex helped formalize the result in Lean. [Challenge.lean](Challenge.lean) defines the model and states the two theorems with their proof slots open. [Solution.lean](Solution.lean) supplies both proofs. [comparator.json](comparator.json) selects them for comparison. To build the proofs locally, run `lake build Solution` from the repository root.
+
+A working paper on these results is forthcoming.

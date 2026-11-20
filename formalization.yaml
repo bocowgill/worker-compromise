@@ -12,6 +12,7 @@ project:
     Consequently, even a clearinghouse that chooses separately for each objective
     cannot deliver mean partner ranks at the square-root benchmark on both sides,
     or mean utilities at the half-log benchmark on both sides.
+    A working paper on these results is forthcoming.
   authors: ["Bo Cowgill"]
   responsible_maintainers: ["Bo Cowgill"]
   license: "Apache-2.0"
